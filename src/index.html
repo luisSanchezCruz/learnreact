@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pure react samples</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- target container-->
+    <div  id="root"></div>
+    
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script>
+        
+        class App extends React.Component {
+            render() {
+                return React.createElement("div",
+                    {...this.props})
+            }
+        }
+        
+        var h1 = React.createElement("h1",null,"React app")
+
+        var myApp = React.createElement(App,{className:"myapp-class"},h1);
+        
+
+       ReactDOM.render(myApp, document.getElementById('root'));
+    </script>
+</body>
+</html>

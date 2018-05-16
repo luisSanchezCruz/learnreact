@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pure react samples</title>
+    <style>
+        .app-thumbnail {
+            border-radius: 5px;
+            border: 2px solid black;
+            width: 150px;
+            display: inline-block;
+            margin:5px;
+            
+        }
+        .app-thumbnail:hover {
+            border: 2px solid lightskyblue;
+
+        }
+        .app-thumbnail img {
+            display: block;
+            width: 100%;
+                
+        }
+
+        .app-thumbnail-caption {
+            text-align: center;
+            color: black;
+            background-color: slategrey;
+            padding: 20px 10px;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .thumbnail-container {
+
+            padding: 5px;
+            display: block;
+            border: 1px solid black;
+            margin: 0 auto;
+            border-radius: 5px;
+            width: 500px;
+
+        }
+    </style>
+</head>
+<body>
+    <!-- target container-->
+    <div  id="root"></div>
+    
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script>
+        //pure react 
+        
+
+         //sample data for components
+         var team = [
+            {img: {src:"img/smile.png", alt:"luis"},captionText:"smile"},
+            {img: {src:"img/frown.png", alt:"jose"},captionText:"frown"},
+            {img: {src:"img/smile.png", alt:"lucas"},captionText:"smile"},
+            {img: {src:"img/frown.png", alt:"carlos"},captionText:"smile"},
+            {img: {src:"img/smile.png", alt:"juan"},captionText:"smile"},
+            {img: {src:"img/frown.png", alt:"carlos"},captionText:"smile"}
+        ];
+        
+        const Img = (props) => 
+            React.createElement("img",
+                {...props},
+                null
+            )
+        /*
+        class Img extends React.Component {
+            render() {
+                return React.createElement("img",   
+                    {...this.props},null
+                )
+            }
+        }
+       */
+      
+        const Thumbnail = (props) => 
+            React.createElement("div",
+                {className:"app-thumbnail"},
+                React.createElement(Img,
+                    {...props.img},
+                    null),
+                React.createElement("span",
+                    {className:"app-thumbnail-caption"},
+                    props.captionText)
+            )
+        /*
+        class Thumbnail extends React.Component {
+            render() {
+                return React.createElement("div",
+                    {className:"app-thumbnail"},
+                    React.createElement(Img,
+                        {...this.props.img},
+                        null),
+                    React.createElement("span",
+                        {className:"app-thumbnail-caption"},
+                        this.props.captionText)
+
+                )
+            }
+        }
+        */
+        const ThumbnailContainer = (props) =>
+            React.createElement("div",
+                {className:"thumbnail-container"},
+                props.items.map((item, i) =>
+                    React.createElement(Thumbnail,
+                        {...item,key:i},null)
+                )
+            )
+        /*
+            class ThumbnailContainer extends React.Component {
+                render() {
+                    return React.createElement("div",
+                        {className:"thumbnail-container"},
+                        this.props.items.map((item, i) =>
+                            React.createElement(Thumbnail,
+                                {...item,key:i},null)
+                        )
+                    )
+                }
+            }
+            */
+       const teamContainer = React.createElement(ThumbnailContainer,{items:team},null);
+       const app = React.createElement("div", {className:"appdiv"}, teamContainer);
+       ReactDOM.render(app, document.getElementById('root'));
+    </script>
+</body>
+</html>
